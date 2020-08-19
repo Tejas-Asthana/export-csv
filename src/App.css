@@ -1,0 +1,97 @@
+.App {
+  text-align: center;
+  padding: 10px;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 20px auto;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+caption {
+  padding: 10px;
+  /* border: 1px solid grey; */
+  margin: 0 auto 10px;
+  border-radius: 10px;
+  max-width: 500px;
+}
+
+thead {
+  background: linear-gradient(to right, rgb(127, 127, 213), rgb(134, 168, 231), rgb(145, 234, 228));
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-bottom: 10px;
+}
+
+.col-head {
+  padding: 10px;
+}
+
+.row-elem {
+  color: #000000;
+  padding: 10px;
+  border: 1px solid #ddd;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+td {
+  max-width: 100%;
+  width: 300px;
+}
+
+tr:nth-child(even){
+  background-color: #e2f3f5;
+}
+
+.selected {
+  transition: all 0.3s;
+  background-color: #3d6cb9;
+  color:#fff;
+  color: #e8ffe8;
+  z-index: 2;
+  box-shadow: 5px 5px 10px #4592af, -5px 5px 10px #3d6cb9;
+}
+
+.show-counter {
+  padding: 10px;
+  margin: 5% auto;
+  color: #17b978
+}
+
+.export-btn {
+  padding: 15px 20px;
+  border: none;
+  border-radius: 40px;
+  color: white;
+  width: 100%;
+  max-width: 400px;
+}
+
+.btn-active {
+  cursor: pointer;
+  background: linear-gradient(to right, rgb(101, 78, 163), rgb(234, 175, 200));
+}
+
+.btn-disabled {
+  cursor: normal;
+  transition: all 0.3s;
+  background: linear-gradient(to right, rgb(15, 32, 39), rgb(32, 58, 67), rgb(44, 83, 100));
+}
+
+@media (max-width: 500px) {
+  caption, thead, td, .export-btn, .show-counter {
+    font-size: 14px;
+  }
+
+  .row-elem, .col-head {
+    padding: 10px 5px
+  }
+
+  .export-btn {
+    max-width: 250px;
+  }
+}
