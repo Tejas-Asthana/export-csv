@@ -51,7 +51,7 @@ class App extends React.Component {
     }
     let newArr2 = []
     for(let i=0; i< indexes.length; i++)
-      newArr2.push(head[i])
+      newArr2.push(head[indexes[i]])
     arrCol.push(newArr2)
     return {arr, arrCol}
   }
