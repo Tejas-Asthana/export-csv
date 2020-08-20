@@ -71,6 +71,7 @@ tr:nth-child(even){
   max-width: 400px;
 }
 
+
 .btn-active {
   cursor: pointer;
   background: linear-gradient(to right, rgb(101, 78, 163), rgb(234, 175, 200));
@@ -80,6 +81,14 @@ tr:nth-child(even){
   cursor: normal;
   transition: all 0.3s;
   background: linear-gradient(to right, rgb(15, 32, 39), rgb(32, 58, 67), rgb(44, 83, 100));
+}
+
+.btn-active-pdf {
+  background: linear-gradient(to right, rgb(31, 64, 55), rgb(153, 242, 200));
+}
+
+.btn-disabled-pdf {
+  background: linear-gradient(to right, rgb(60, 59, 63), rgb(96, 92, 60));
 }
 
 @media (max-width: 500px) {

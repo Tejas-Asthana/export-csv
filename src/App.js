@@ -1,7 +1,8 @@
 import React from 'react';
 import data from './data.json'
-
-import './App.css';
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
+import './App.css'; 
 
 class App extends React.Component {
   constructor() {
@@ -31,24 +32,33 @@ class App extends React.Component {
     })
   }
 
-  handleExport = (selectedValues) => {
+  pickSelectedCols = (selectedValues) => {
     let indexes = [...selectedValues]
     indexes = indexes.sort()
-    let { body } = data
+    let { body, head } = data
     let arr = []
+    let arrCol = []
     let x =0
     while(x < data.body.length) {
-      let newArr = []
+      let newArr1 = []
       let w=0
       while(w < indexes.length) {
-        newArr.push(body[x][indexes[w]])
+        newArr1.push(body[x][indexes[w]])
         w=w+1
       }
-      arr.push(newArr)
+      arr.push(newArr1)
       x++
     }
+    let newArr2 = []
+    for(let i=0; i< indexes.length; i++)
+      newArr2.push(head[i])
+    arrCol.push(newArr2)
+    return {arr, arrCol}
+  }
 
-    let csvArr = [];
+  handleExportasCsv = (selectedValues) => {
+    let {arr, arrCol} = this.pickSelectedCols(selectedValues)
+    let csvArr = [...arrCol];
     for(let i=0; i<arr.length; i++)
       csvArr.push(arr[i].join(","))
     let str = csvArr.join("%0A")
@@ -59,6 +69,16 @@ class App extends React.Component {
     a.download='file.csv'
     document.body.appendChild(a)
     a.click()
+  }
+
+  handleExportasPdf = (selectedValues) => {
+    let {arr, arrCol} = this.pickSelectedCols(selectedValues)
+    const doc = new jsPDF()
+    doc.autoTable({
+      head: [...arrCol],
+      body: [...arr]
+    })
+    doc.save('file.pdf')
   }
 
   render() {
@@ -107,9 +127,19 @@ class App extends React.Component {
           <button 
             disabled={this.state.selected.length > 0 ? false : true} 
             className={"export-btn " + (this.state.selected.length > 0 ? "btn-active" : "btn-disabled")}
-            onClick={() => this.handleExport(this.state.selected)}
+            onClick={() => this.handleExportasCsv(this.state.selected)}
           >
               {this.state.selected.length > 0 && "Export as csv file >"}
+              {this.state.selected.length === 0 && "Select atleast one column to export"}
+          </button>
+        </div>
+        <div style={{margin: "20px auto 0 auto"}}>
+          <button 
+            disabled={this.state.selected.length > 0 ? false : true} 
+            className={"export-btn " + (this.state.selected.length > 0 ? "btn-active-pdf" : "btn-disabled-pdf")}
+            onClick={() => this.handleExportasPdf(this.state.selected)}
+          >
+              {this.state.selected.length > 0 && "Export as pdf file >"}
               {this.state.selected.length === 0 && "Select atleast one column to export"}
           </button>
         </div>
